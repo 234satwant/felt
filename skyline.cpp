@@ -5,7 +5,6 @@ In diagonal array all the diagonal elements are stored.
 In mat_lower all skyline elements in the lower triangle of the matrix are stored (row-wise).
 And the ith component of indexes array tells where (i+1)th row of lower_mat begins.
 All the elements of mat_lower from indexes[i] to indexea[i+1]-1 are the off-diagonal elements of row i+1 in increasing column order.
-The difference indexes[i+1]-indexes[i] tells the number of off-diagonal elements in row i+1 that belong to the skyline.
 */
 
 #include <iostream>

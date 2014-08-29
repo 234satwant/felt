@@ -1,4 +1,4 @@
-/* The program takes a 2-D array and a vector as input.
+/* The program takes a SYMMETRIC 2-D array and a vector as input.
 Then it computs the skyline form of 2-D array, multiplies it with the vector and outputs the resultant vector.
 The skyline format of a matrix is given by three arrays diagoanl,mat_lower and indexes.
 In diagonal array all the diagonal elements are stored.
@@ -6,6 +6,8 @@ In mat_lower all skyline elements in the lower triangle of the matrix are stored
 And the ith component of indexes array tells where (i+1)th row of lower_mat begins.
 All the elements of mat_lower from indexes[i] to indexea[i+1]-1 are the off-diagonal elements of row i+1 in increasing column order.
 */
+
+//ONLY FOR SYMMETRIC MATRICES
 
 #include <iostream>
 

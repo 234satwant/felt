@@ -18,6 +18,7 @@ int main()
     cout<<"Enter the size/order of matrix \t";
     cin>>size;
     int mat[size][size];  //create the 2-D array of required size
+    cout<<"Enter elements of matrix\n";
     for(int i =0;i<size;i++)   //input elements of 2-D array
     {
         for(int j =0;j<size;j++)

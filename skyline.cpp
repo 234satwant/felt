@@ -55,12 +55,16 @@ int main()
         indexes[i_index]=t_index;  //store value of t_index in indexes array
         i_index++;
     }
+    
+    cout<<"Diagonal :"
     for(int i =0;i<size;i++)
         cout<<diagonal[i]<<" ";
     cout<<"\n";
+    cout<<"Mat_lower :";
     for(int i =0;i<t_index;i++)
         cout<<mat_lower[i]<<" ";
     cout<<"\n";
+    cout<<"Indexes :";
     for(int i =0;i<i_index;i++)
         cout<<indexes[i]<<" ";
     cout<<"\n";
@@ -79,7 +83,7 @@ int main()
         for(int i =indexes[k-1],j=k-nex;i<indexes[k];i++,j++)  //for the upper triangular part
         diagonal[j]+=mat_lower[i]*x[k];
     }
-    cout<<"\n";
+    cout<<"\n Result :";
     for(int i=0;i<size;i++)
     cout<<diagonal[i]<<"\n";   //result
 }

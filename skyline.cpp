@@ -85,10 +85,3 @@ int main()
     cout<<diagonal[i]<<"\n";   //result
 }
 
-/*
-Complexity:
-To multiply nXn matrix with a nX1 vector without using skyline: n^2 multiplications and n(n-1) additions are required i.e. complexity is of order n^2
-To multiply nXn matrix with a nX1 vector using skyline: complexity is of order nk where k is the average number of elements in skyline (k<n) of each row.
-Note that in worst case the complexity of multiplication would be same in both cases. It is but obvious that the skyline method has advantage only
-when the matrix is sparse.
-*/

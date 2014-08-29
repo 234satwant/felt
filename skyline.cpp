@@ -56,7 +56,7 @@ int main()
         i_index++;
     }
     
-    cout<<"Diagonal :"
+    cout<<"Diagonal :";
     for(int i =0;i<size;i++)
         cout<<diagonal[i]<<" ";
     cout<<"\n";
@@ -83,7 +83,7 @@ int main()
         for(int i =indexes[k-1],j=k-nex;i<indexes[k];i++,j++)  //for the upper triangular part
         diagonal[j]+=mat_lower[i]*x[k];
     }
-    cout<<"\n Result :";
+    cout<<"\nResult :";
     for(int i=0;i<size;i++)
     cout<<diagonal[i]<<"\n";   //result
 }

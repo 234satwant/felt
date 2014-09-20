@@ -6,38 +6,35 @@ using namespace std;
 int main()
 {
   int n;
-
-  cout<<"Size of matrix = ";
   cin>>n;
+
   float D[n]; //diagonal elements of matrix
-  float ANS[n];
-  cout<<n<<"DIagonal elements ";
   for(int i=0;i<n;i++)
   cin>>D[i];
-  int noLow;
-  cout<<"No. of elements in lower triangle ";
+
+  int noLow;// no of elements in lower triangular matrix
   cin>>noLow;
-  cout<<"Elements of Lower triangle";
-  float LA[noLow];
+
+  float LA[noLow]; //the lower triangular matrix
   for(int i=0;i<noLow;i++)
   cin>>LA[i];
-  cout<<n<<" ELements of Lower triangle index ";
-  int LI[n];
+
+  int LI[n]; //index array for LA
   for(int i=0;i<n;i++)
   cin>>LI[i];
-  int noUp;
-  cout<<"No. of elements in upper triangle ";
+
+  int noUp;// no of elements in upper triangle
   cin>>noUp;
-   cout<<"Elements of Upper triangle";
-  float UA[noUp];
+
+  float UA[noUp];//the upper triangular matrix
   for(int i=0;i<noUp;i++)
   cin>>UA[i];
-  cout<<n<<" ELements of Upper triangle index ";
-  int UI[n];
+
+  int UI[n];//index array of UA
   for(int i=0;i<n;i++)
   cin>>UI[i];
-  float RHS[n];
-  cout<<"Elements of RHS ";
+
+  float RHS[n];//the RHS vector
   for(int i=0;i<n;i++)
   cin>>RHS[i];
 
@@ -45,184 +42,74 @@ int main()
     //FOR LOWER TRIANGLE
     for(int row=1;row<=n-1;row++)
     {
-    	cout<<"\n\n\nFor row "<<row<<"\n";
-        int lfrom=LI[row-1];
+        int lfrom=LI[row-1];//lower elements of row
         int lto=LI[row]-1;
         int lne = lto-lfrom +1;
-        int ufrom = UI[row];
+        int ufrom = UI[row];//upper elements of row
         int uto = UI[row+1]-1;
         int une = uto - ufrom +1;
         if(row==n-1)
         une =0;
-		cout<<"lfrom "<<lfrom<<" lto "<<lto<<" lne "<<lne<<"\n";
-		cout<<"ufrom "<<ufrom<<" uto "<<uto<<" une "<<une<<"\n";
-        for(int j =0,i=lfrom;i<=lto;i++,j++)
+        for(int j =0,i=lfrom;i<=lto;i++,j++)// for each lower element
         {
-            diagonal = row-lne+j;
-            udiafrom = UI[diagonal];
+            diagonal = row-lne+j;//diagonal row
+            udiafrom = UI[diagonal];//upper elements of diagonal row
             udiato = UI[diagonal+1]-1;
             int udne = udiato-udiafrom+1;
-            cout<<" Diagonal "<<diagonal<<"\n";
-			cout<<" udiafrom " <<udiafrom<<" udiato "<<udiato<<" une  "<<une<<"\n";
-            float temp = LA[i]/D[diagonal];
-            // For diagonal row's diagonal and upper triangle elements
-            cout<<"\ntemp: "<<temp<<"\n";
-            //diagonal row ends
 
-            //for the row itself: LA diagonal and UA
+            float temp = LA[i]/D[diagonal];
+
             LA[i]=0;
 
-
-
-
-				cout<<"Lower\n";
-	for(int i=0;i<noLow;i++)
-	cout<<LA[i]<<" ";
-	cout<<endl;
-	cout<<"Upper\n";
-	for(int i=0;i<noUp;i++)
-	cout<<UA[i]<<" ";
-	cout<<endl;
-	cout<<"Diagonal\n";
-	for(int i=0;i<n;i++)
-	cout<<D[i]<<" ";
-	cout<<"\nRHS\n";
-	for(int i=0;i<n;i++)
-	cout<<RHS[i]<<" ";
             int begincol = row - lne + j +1;
             int endcol = row + une;
-			cout<<"begincol "<<begincol<<" endcol "<<row << une << row + une;
-            //Subtraction:
+	    
+	    //Subtraction: for each element of upper triangle in diagonal row
             for(int udi = udiafrom,jj=0;udi<=udiato;udi++,jj++)
             {
                 int column = diagonal+1+jj;
                 if (column == row)
                 {
-                		cout<<"\n colrow"<<column<<" "<<row<<" "<<diagonal;
                     D[row]=D[row]-(UA[udi]*temp);
-                }else if (column <row && column >=begincol)
+                }
+                else if (column <row && column >=begincol)
                 {
-                	cout<<"\n low";
                     int diff = row - column;
-                    cout<<LA[lto-diff+1]<<"ANS\n"<<UA[udi]<<"\n";
                     LA[lto-diff+1]-=UA[udi]*temp;
-                    cout<<LA[lto-diff+1]<<"ANS\n";
 	            }
                 else if (column >row && column <=endcol)
                 {
-                		cout<<"\n high";
                     int diff = column - row;
                     UA[ufrom+diff-1]-=UA[udi]*temp;
                 }
-			}
-			RHS[row]-=RHS[diagonal]*temp;
-				cout<<"Lower\n";
-	for(int i=0;i<noLow;i++)
-	cout<<LA[i]<<" ";
-	cout<<endl;
-	cout<<"Upper\n";
-	for(int i=0;i<noUp;i++)
-	cout<<UA[i]<<" ";
-	cout<<endl;
-	cout<<"Diagonal\n";
-	for(int i=0;i<n;i++)
-	cout<<D[i]<<" ";
-	cout<<"\nRHS\n";
-	for(int i=0;i<n;i++)
-	cout<<RHS[i]<<" ";
+	     }
+        	RHS[row]-=RHS[diagonal]*temp;
         }
     }
-	//for n-1 row
 
-	cout<<"UPPPPPPPPPPPPPPPPPPP";
-	for(int i=0;i<noLow;i++)
-	cout<<LA[i]<<" ";
-	cout<<endl;
-	cout<<"Upper\n";
-	for(int i=0;i<noUp;i++)
-	cout<<UA[i]<<" ";
-	cout<<endl;
-	cout<<"Diagonal\n";
-	for(int i=0;i<n;i++)
-	cout<<D[i]<<" ";
-	cout<<"RHS\n";
-	for(int i=0;i<n;i++)
-	cout<<RHS[i]<<" ";
     //FOR UPPER TRIANGLE
     for(int row=n-2;row>=0;row--)
     {
-    	cout<<"\n\nRow is "<<row<<"\n";
-        int ufrom=UI[row];
+        int ufrom=UI[row]; //for each element in upper triangle of row
         int uto=UI[row+1]-1;
-        cout<<"ufrom "<<ufrom<<" uto "<<uto;
 
         for(int j =0,i=ufrom;i<=uto;i++,j++)
         {
             diagonal = row+j+1;
-			cout<<"\nDiagonal "<<diagonal;
             float temp =  UA[i]/D[diagonal];
 
-            //for the row itself: LA diagonal and UA
-            cout<<"RHS[row" <<RHS[row]<<"\n";
-            cout<<"temp:"<<temp<<"\n";
             RHS[row]-=RHS[diagonal]*temp;
-
 	        UA[i]=0;
-        	cout<<"Lower\n";
-	for(int i=0;i<noLow;i++)
-	cout<<LA[i]<<" ";
-	cout<<endl;
-	cout<<"Upper\n";
-	for(int i=0;i<noUp;i++)
-	cout<<UA[i]<<" ";
-	cout<<endl;
-	cout<<"Diagonal\n";
-	for(int i=0;i<n;i++)
-	cout<<D[i]<<" ";
-	cout<<"RHS\n";
-	for(int i=0;i<n;i++)
-	cout<<RHS[i]<<" ";
-
-
         }
-
-            for(int i=0;i<noLow;i++)
-	cout<<LA[i]<<" ";
-	cout<<endl;
-	cout<<"Upper\n";
-	for(int i=0;i<noUp;i++)
-	cout<<UA[i]<<" ";
-	cout<<endl;
-	cout<<"Diagonal\n";
-	for(int i=0;i<n;i++)
-	cout<<D[i]<<" ";
-	cout<<"RHS\n";
-	for(int i=0;i<n;i++)
-	cout<<RHS[i]<<" ";
-
     }
-
-	cout<<"Lower\n";
-	for(int i=0;i<noLow;i++)
-	cout<<LA[i]<<" ";
-	cout<<endl;
-	cout<<"Upper\n";
-	for(int i=0;i<noUp;i++)
-	cout<<UA[i]<<" ";
-	cout<<endl;
-	cout<<"Diagonal\n";
+	cout<<"\n\nANswer\n";//display answer 
 	for(int i=0;i<n;i++)
-	cout<<D[i]<<" ";
-	cout<<"RHS\n";
-	for(int i=0;i<n;i++)
-	cout<<RHS[i]<<" ";
-
-	/*float ANS[n];
-	for(int i=0;i<n;i++)
-	ANS[i]=RHS[i]/D[i];*/
-	cout<<"ANswer\n";
-	for(int i=0;i<n;i++)
-	{ANS[i]=RHS[i]/D[i];cout<<ANS[i]<<" ";}
+	{
+	    RHS[i]=RHS[i]/D[i];
+	    cout<<RHS[i]<<" ";
+        }
+	cout<<"\n\n";
 }
+
 
 
